@@ -51,3 +51,6 @@ pids
 # Temporary folders
 tmp/
 temp/
+
+# claude code
+settings.local.json
