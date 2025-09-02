@@ -78,6 +78,57 @@ vitepress-offline/
 - **Mermaid** `^11.10.1`: 다이어그램 라이브러리
 - **vitepress-plugin-mermaid** `^2.0.17`: Mermaid 플러그인
 
+## 알려진 문제
+
+### Mermaid 다이어그램 호환성 문제
+
+현재 `vitepress-plugin-mermaid` v2.0.17과 `mermaid` v11.10.1 간의 호환성 문제로 인해 **일부 다이어그램이 렌더링되지 않을 수 있습니다**.
+
+#### 영향을 받는 다이어그램:
+- **gitGraph**: v11에서 문법 요구사항 변경으로 렌더링 실패
+- **일부 고급 다이어그램**: 새로운 다이어그램 타입들
+
+#### 임시 해결 방법:
+1. **gitGraph 사용 시**: `commit id: "설명"` 형태로 명시적 ID 제공
+2. **설정 블록 추가**:
+   ```markdown
+   ```mermaid
+   ---
+   config:
+     gitGraph:
+       showBranches: true
+       showCommitLabel: true
+   ---
+   gitGraph
+       commit id: "초기"
+   ```
+   ```
+
+#### 향후 업데이트 방법:
+
+플러그인 호환성 문제가 해결되면 다음 명령으로 업데이트하세요:
+
+```bash
+# 최신 버전 확인
+npm outdated
+
+# vitepress-plugin-mermaid 업데이트
+npm update vitepress-plugin-mermaid
+
+# 또는 최신 버전으로 강제 업그레이드
+npm install vitepress-plugin-mermaid@latest --save-dev
+
+# mermaid 버전도 함께 업데이트
+npm install mermaid@latest --save-dev
+```
+
+업데이트 후 개발 서버를 재시작하세요:
+```bash
+npm run docs:dev
+```
+
+> **참고**: 이 문제는 [vitepress-plugin-mermaid GitHub Issues](https://github.com/emersonbottero/vitepress-plugin-mermaid/issues)에서 추적되고 있으며, 향후 업데이트에서 해결될 예정입니다.
+
 ## 오프라인 사용
 
 이 프로젝트는 오프라인 환경에서의 사용을 고려하여 다음과 같이 설정되었습니다:
